@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * @author ouyzh49490
  * @PackageName com.hundsun.tbsp.IODemo
- * @Description TODO
+ * @Description
  * @date 2023/11/1 21:37
  */
 public class InputStreamDemo {
