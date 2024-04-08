@@ -39,6 +39,8 @@ public class ReentrantLockTest {
         lock.lock();
         t1.start();
         t1.interrupt();
+        Thread t2 =new Thread("t2");
+        t2.setDaemon(true);
         lock.unlock();
 
 
