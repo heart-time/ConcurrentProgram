@@ -1,10 +1,7 @@
 package com.hundsun.tbsp.ThreadDemo2;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /**
  * @author ouyzh49490
@@ -14,27 +11,31 @@ import java.util.concurrent.Executors;
  */
 public class ThreadDemo4 {
     public static void main(String[] args) throws InterruptedException {
-        CountDownLatch latch = new CountDownLatch(10);
-        String temp[] = new String[10];
-        Random random = new Random();
-        ExecutorService threadPool = Executors.newFixedThreadPool(10);
-        for (int i = 0; i < 10; i++) {
-            int index = i;
-            threadPool.execute(()->{
-                for (int j = 0; j < 100; j++) {
-                    try {
-                        Thread.sleep(random.nextInt(200));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    temp[index] = String.valueOf(j+1);
-                    System.out.print("\r"+Arrays.toString(temp));
-                }
-                latch.countDown();
-            });
-        }
-        latch.await();
-        System.out.println("游戏加载结束");
-        threadPool.shutdown();
+       Thread t1 =new Thread("fdsafa");
+        t1.start();
+        Callable c1 =new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                System.out.println("callable");
+                throw new RuntimeException("故意抛出一个异常");
+            }
+        };
+        FutureTask<Integer> f1 = new FutureTask<>(new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                System.out.println("callable");
+                return 100;
+            }
+        });
+         Runnable r1 = new Runnable() {
+             @Override
+             public void run() {
+                 System.out.println("fdsafdsa");
+             }
+         };
+        Thread t2 = new Thread(()->{
+
+        });
+
     }
 }
